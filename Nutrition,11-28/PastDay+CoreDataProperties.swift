@@ -2,13 +2,12 @@
 //  PastDay+CoreDataProperties.swift
 //  WUSTLNutrition
 //
-//  Created by labuser on 11/19/17.
-//  Copyright © 2017 labuser. All rights reserved.
+//  Created by zblue on 11/19/17.
+//  Copyright © 2017 zblue. All rights reserved.
 //
 
 import Foundation
 import CoreData
-
 
 extension PastDay {
 
@@ -27,9 +26,7 @@ extension PastDay {
 
 }
 
-// MARK: Generated accessors for customFoodsEaten
 extension PastDay {
-
     @objc(addCustomFoodsEatenObject:)
     @NSManaged public func addToCustomFoodsEaten(_ value: CustomFood)
 
@@ -41,12 +38,9 @@ extension PastDay {
 
     @objc(removeCustomFoodsEaten:)
     @NSManaged public func removeFromCustomFoodsEaten(_ values: NSSet)
-
 }
 
-// MARK: Generated accessors for foodsEaten
 extension PastDay {
-
     @objc(addFoodsEatenObject:)
     @NSManaged public func addToFoodsEaten(_ value: SavedFood)
 
@@ -58,7 +52,6 @@ extension PastDay {
 
     @objc(removeFoodsEaten:)
     @NSManaged public func removeFromFoodsEaten(_ values: NSSet)
-
 }
 
 extension NSManagedObject {

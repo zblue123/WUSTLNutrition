@@ -2,8 +2,8 @@
 //  CustomFood+CoreDataClass.swift
 //  WUSTLNutrition
 //
-//  Created by labuser on 11/19/17.
-//  Copyright © 2017 labuser. All rights reserved.
+//  Created by zblue on 11/19/17.
+//  Copyright © 2017 zblue. All rights reserved.
 //
 
 import Foundation

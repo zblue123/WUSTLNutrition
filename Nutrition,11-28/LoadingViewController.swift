@@ -2,8 +2,8 @@
 //  LoadingViewController.swift
 //  WUSTLNutrition
 //
-//  Created by labuser on 11/13/17.
-//  Copyright © 2017 labuser. All rights reserved.
+//  Created by zblue on 11/13/17.
+//  Copyright © 2017 zblue. All rights reserved.
 //
 
 import UIKit

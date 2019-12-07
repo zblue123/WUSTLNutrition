@@ -2,8 +2,8 @@
 //  PastDayViewController.swift
 //  WUSTLNutrition
 //
-//  Created by labuser on 11/16/17.
-//  Copyright © 2017 labuser. All rights reserved.
+//  Created by zblue on 11/16/17.
+//  Copyright © 2017 zblue. All rights reserved.
 //
 
 import UIKit
@@ -18,16 +18,17 @@ class PastDayViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var fatLabel: UILabel!
     @IBOutlet weak var foodsEatenLabel: UILabel!
     @IBOutlet weak var foodsEatenTableView: UITableView!
+    var theDay = savedDays[selectedDate!]
     
     @IBAction func backToDateList(_ sender: Any) {
         let destination = storyboard?.instantiateViewController(withIdentifier: "DateTableViewController") as! UIViewController
         self.navigationController?.pushViewController(destination, animated: true)
     }
-    var theDay = savedDays[selectedDate!]
     
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = selectedDate!.toString()
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
       
@@ -35,7 +36,6 @@ class PastDayViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.navigationController?.navigationBar.tintColor = FlatWhite()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: FlatWhite()]
         isHistorical = true
-        
         
         populateLabels()
         carbLabel.adjustsFontSizeToFitWidth = true
@@ -45,27 +45,18 @@ class PastDayViewController: UIViewController, UITableViewDelegate, UITableViewD
         proteinLabel.adjustsFontSizeToFitWidth = true
         foodsEatenTableView.delegate = self
         foodsEatenTableView.dataSource = self
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        if (theDay!.foodsEaten.count) > 0 && (theDay!.customFoodsEaten.count) > 0 {
-            
-        }
-        return 2    }
+        return 2    
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        
-        if section == 0 {
-
-            
+        if section == 0 { 
             return (theDay!.foodsEaten.count)
         } else {
             return (theDay!.customFoodsEaten.count)
@@ -84,12 +75,14 @@ class PastDayViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NutritionTableViewCell", for: indexPath) as! NutritionTableViewCell
         var pastFood : Food
+
         if indexPath.section == 0 {
             pastFood = (theDay!.foodsEaten[indexPath.row])
         } else {
             pastFood = (theDay!.customFoodsEaten[indexPath.row])
         }
         cell.foodNameLabel.text = pastFood.name
+
         if pastFood.den == 1 {
             cell.foodQuantityLabel.text = String(pastFood.num)
         } else {
@@ -103,7 +96,6 @@ class PastDayViewController: UIViewController, UITableViewDelegate, UITableViewD
         isPast = true
         let destination = storyboard?.instantiateViewController(withIdentifier: "FoodViewController") as! UIViewController
         
-        //selectedFood = savedFoods[theDay!.foodsEaten[indexPath.row].name]
         selectedFood = theDay!.foodsEaten[indexPath.row]
         self.navigationController?.pushViewController(destination, animated: true)
         selectedFood = indexPath.section == 0 ? theDay!.foodsEaten[indexPath.row] : theDay!.customFoodsEaten[indexPath.row]
@@ -116,7 +108,6 @@ class PastDayViewController: UIViewController, UITableViewDelegate, UITableViewD
             foodsEatenLabel.text = "No Foods Eaten"
         }
         
-        //let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         
@@ -138,15 +129,4 @@ class PastDayViewController: UIViewController, UITableViewDelegate, UITableViewD
         fatLabel.text = String(f!) + " g"
         sodiumLabel.text = String(s!) + " mg"
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

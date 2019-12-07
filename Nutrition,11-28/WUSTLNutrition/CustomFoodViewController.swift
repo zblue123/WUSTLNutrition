@@ -2,8 +2,8 @@
 //  CustomFoodViewController.swift
 //  WUSTLNutrition
 //
-//  Created by labuser on 11/15/17.
-//  Copyright © 2017 labuser. All rights reserved.
+//  Created by zblue on 11/15/17.
+//  Copyright © 2017 zblue. All rights reserved.
 //
 
 import UIKit
@@ -15,8 +15,6 @@ import Charts
 
 class CustomFoodViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
-    
-
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nameTextField: UITextField!
 
@@ -40,9 +38,7 @@ class CustomFoodViewController: UIViewController, UITableViewDelegate, UITableVi
         self.present(destination,animated: true, completion:  nil)
     }
     
-    //Calls this function when the tap is recognized.
     @objc func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
     
@@ -50,12 +46,12 @@ class CustomFoodViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         isHistorical = false
-        //Looks for single or multiple taps.
+
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CustomFoodViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         addFoodButton.tintColor = FlatRed()
         self.navigationController?.navigationBar.barTintColor = FlatRed()
-       self.navigationController?.navigationBar.tintColor = FlatWhite()
+        self.navigationController?.navigationBar.tintColor = FlatWhite()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: FlatWhite()]
         
         tableView.delegate = self
@@ -70,12 +66,10 @@ class CustomFoodViewController: UIViewController, UITableViewDelegate, UITableVi
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(notification:)), name: Notification.Name("row"), object: nil)
         
         nameTextField.placeholder = "Food Name"
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -100,16 +94,5 @@ class CustomFoodViewController: UIViewController, UITableViewDelegate, UITableVi
         print(obj)
         print(foodDict)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 

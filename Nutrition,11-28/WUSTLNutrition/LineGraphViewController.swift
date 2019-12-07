@@ -2,8 +2,8 @@
 //  LineGraphViewController.swift
 //  WUSTLNutrition
 //
-//  Created by Linda Bluestein on 11/25/17.
-//  Copyright © 2017 labuser. All rights reserved.
+//  Created by zblue on 11/25/17.
+//  Copyright © 2017 zblue. All rights reserved.
 //
 
 import UIKit
@@ -46,6 +46,7 @@ class LineGraphViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         isHistorical = false
         self.navigationController?.navigationBar.barTintColor = FlatRed()
         self.navigationController?.navigationBar.tintColor = FlatWhite()
@@ -60,18 +61,16 @@ class LineGraphViewController: UIViewController {
         sodSwitch.onTintColor = FlatRed()
         proSwitch.isOn = false
         proSwitch.onTintColor = FlatRed()
-        // Do any additional setup after loading the view.
     }
 
    
     @IBAction func backToGrapher(_ sender: Any) {
         let destination = storyboard?.instantiateViewController(withIdentifier: "AnalyticsViewController") as! UIViewController
-        
         self.navigationController?.pushViewController(destination, animated: true)
     }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func updateChartData() {
@@ -93,7 +92,6 @@ class LineGraphViewController: UIViewController {
             sod.append(ChartDataEntry(x: Double(day.dayInt()), y: Double(savedDays[day]!.nutritionTotals["Total Sodium"]!)))
             pro.append(ChartDataEntry(x: Double(day.dayInt()), y: Double(savedDays[day]!.nutritionTotals["Total Protein"]!)))
         }
-        
         
         let rad = CGFloat(1)
         let calSet = LineChartDataSet(values: cals, label: "Calories")
@@ -137,18 +135,12 @@ class LineGraphViewController: UIViewController {
         lineChartView.data = LineChartData(dataSets: data)
         
         let xAxis: XAxis = lineChartView.xAxis
-        //print(chartData.xMax)
-        //print(chartData.xMin)
-        //xAxis.
+
         xAxis.drawAxisLineEnabled = true
         xAxis.drawGridLinesEnabled = true
         xAxis.drawLabelsEnabled = false
-        print(xAxis.axisRange)
         xAxis.axisMinimum = (lineChartView.data?.xMin)!
         xAxis.axisMaximum = (lineChartView.data?.xMax)!
-        
-        //chartView.scaleX = CGFloat(1.1)
-        
         
         let leftAxis: YAxis = lineChartView.leftAxis
         leftAxis.drawAxisLineEnabled = true
@@ -156,13 +148,8 @@ class LineGraphViewController: UIViewController {
         leftAxis.setLabelCount(2, force: true)
         leftAxis.axisMinimum = 0.0
         leftAxis.axisMaximum = (lineChartView.data?.yMax)!
-        //leftAxis.drawLabelsEnabled = true
-        
-        
-        // chartData.setDrawValues(true)
-        //chartView.data = chartData;
+
         lineChartView.chartDescription?.text = ""
-        //chartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .easeInBounce)
         
         lineChartView.doubleTapToZoomEnabled = true
         lineChartView.scaleXEnabled = true
@@ -170,17 +157,4 @@ class LineGraphViewController: UIViewController {
         lineChartView.highlightPerTapEnabled = false
         lineChartView.highlightPerDragEnabled = false
     }
-    
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

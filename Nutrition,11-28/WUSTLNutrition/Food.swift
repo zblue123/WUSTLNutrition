@@ -2,8 +2,8 @@
 //  Food.swift
 //  WUSTLNutrition
 //
-//  Created by labuser on 10/1/17.
-//  Copyright © 2017 labuser. All rights reserved.
+//  Created by zblue on 10/1/17.
+//  Copyright © 2017 zblue. All rights reserved.
 //
 
 import Foundation

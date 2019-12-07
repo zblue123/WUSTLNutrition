@@ -2,8 +2,8 @@
 //  GoalViewController.swift
 //  WUSTLNutrition
 //
-//  Created by labuser on 11/27/17.
-//  Copyright © 2017 labuser. All rights reserved.
+//  Created by zblue on 11/27/17.
+//  Copyright © 2017 zblue. All rights reserved.
 //
 
 import UIKit
@@ -18,14 +18,13 @@ class GoalViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var fatField: UITextField!
     @IBOutlet weak var sodiumField: UITextField!
     
-    //Calls this function when the tap is recognized.
     @objc func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.navigationController?.navigationBar.barTintColor = FlatRed()
         self.navigationController?.navigationBar.tintColor = FlatWhite()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: FlatWhite()]
@@ -45,12 +44,10 @@ class GoalViewController: UIViewController, UITextFieldDelegate {
         carbsField.placeholder = String(cc!)
         proteinField.placeholder = String(p!)
         sodiumField.placeholder = String(s!)
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func goalSetting(_ sender: Any) {
@@ -65,25 +62,11 @@ class GoalViewController: UIViewController, UITextFieldDelegate {
         
         self.navigationController?.pushViewController(destination, animated: true)
         let alert = UIAlertView(title: "Goals Set!", message: "Your Daily Goals have been set, check the graph to see your progress", delegate: nil, cancelButtonTitle: "OK")
-        alert.show()
-        
-        
+        alert.show()  
     }
     
     @IBAction func backToAnalytics(_ sender: Any) {
         let destination = storyboard?.instantiateViewController(withIdentifier: "AnalyticsViewController") as! UIViewController
-        
         self.navigationController?.pushViewController(destination, animated: true)
-        
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

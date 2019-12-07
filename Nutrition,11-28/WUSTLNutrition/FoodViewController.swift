@@ -2,8 +2,8 @@
 //  FoodViewController.swift
 //  WUSTLNutrition
 //
-//  Created by labuser on 10/23/17.
-//  Copyright © 2017 labuser. All rights reserved.
+//  Created by zblue on 10/23/17.
+//  Copyright © 2017 zblue. All rights reserved.
 //
 
 import UIKit
@@ -39,15 +39,12 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
         numLabel.textColor = FlatRed()
         denLabel.textColor = FlatRed()
         
-        
         nameLabel.adjustsFontSizeToFitWidth = true
         
         denPlus.tintColor = FlatRed()
         numPlus.tintColor = FlatRed()
         denMinus.tintColor = FlatRed()
         numMinus.tintColor = FlatRed()
-        
-        
         
         numLabel.isHidden = true
         denLabel.isHidden = true
@@ -71,7 +68,6 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         selectedFood?.den = 1
         selectedFood?.num = 1
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func backToFoodList(_ sender: Any) {
@@ -88,9 +84,6 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
             let destination = storyboard?.instantiateViewController(withIdentifier: "FoodTableViewController") as! UIViewController
             self.navigationController?.pushViewController(destination, animated: true)
         }
-        
-        print("\(isHistorical) history!")
-        
     }
     
     @IBAction func numPlusPressed(_ sender: Any) {
@@ -123,7 +116,6 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func backPressed(_ sender: Any) {
         self.parent?.navigationController?.popViewController(animated: true)
-        print("isPast=\(isPast)")
         if isPast {
             let destination = storyboard?.instantiateViewController(withIdentifier: "MainTabController") as! NavigationTabBarController
             self.present(destination,animated: true, completion:  nil)
@@ -182,7 +174,7 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
         isCustom = false
         
         var newTotals = day.nutritionTotals
-        //print(newTotals)
+        
         newTotals["Total Calories"]! += Int(Double(selectedFood!.nutritionalInformation["Calories"]!) * quant)
         newTotals["Total Carbs"]! += Int(Double(selectedFood!.nutritionalInformation["Tot. Carb."]!) * quant)
         newTotals["Total Protein"]! += Int(Double(selectedFood!.nutritionalInformation["Protein"]!) * quant)
@@ -196,12 +188,9 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.present(destination,animated: true, completion:  nil)
 
     }
-    
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -222,16 +211,4 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         return cell
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
 }

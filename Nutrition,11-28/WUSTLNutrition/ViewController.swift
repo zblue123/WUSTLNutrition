@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  WUSTLNutrition
 //
-//  Created by labuser on 10/1/17.
-//  Copyright © 2017 labuser. All rights reserved.
+//  Created by zblue on 10/1/17.
+//  Copyright © 2017 zblue. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +12,6 @@ import QuartzCore
 import CoreGraphics
 import ChameleonFramework
 import Charts
-//import SwiftCharts
 
 class ViewController: UIViewController, UITabBarDelegate, UITabBarControllerDelegate, UITableViewDelegate, UITableViewDataSource {
 
@@ -26,16 +25,15 @@ class ViewController: UIViewController, UITabBarDelegate, UITabBarControllerDele
     @IBOutlet weak var pieChartView: PieChartView!
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if item.tag == 2{
+        switch item.tag {
+        case 2:
             let destination = storyboard?.instantiateViewController(withIdentifier: "LocationNavigationViewController") as! UINavigationController
             self.present(destination, animated:true, completion: nil)
-        }
-        else if item.tag == 3{
+        case 3:
             let destination = storyboard?.instantiateViewController(withIdentifier: "DateTableNavigationViewController") as! UINavigationController
             self.present(destination, animated:true, completion: nil)
-        }
-        else if item.tag == 4{
-            print("hi there")
+        default:
+            
         }
     }
    
@@ -65,45 +63,17 @@ class ViewController: UIViewController, UITabBarDelegate, UITabBarControllerDele
         self.navigationController?.navigationBar.tintColor = FlatWhite()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: FlatWhite()]
 
-        
-        //self.view.backgroundColor = FlatWhite()
-       // NavigationTabBarController.tabBar.tintColor = FlatRed()
-        //print(FlatRed().hexValue())
-        //_ = ColorSchemeOf(ColorScheme.analogous, color: FlatRed()., isFlatScheme: true)
-        //var colorArray = ColorSchemeOf(ColorScheme.Analogous, FlatRed(), true)
-        //self.view.backgroundColor = FlatRed()
-        // self.view.backgroundColor = UIColor.init(randomFlatColorOf: UIShadeStyle.light)
-        //view.backgroundColor = UIColor.flatGreenDark
-        
-        //self.view.backgroundColor = UIColor(gradientStyle: UIGradientStyle.leftToRight, withFrame: self.view.frame, andColors: [FlatLime()])
-       
         foodsEatenTableView.dataSource = self
         foodsEatenTableView.delegate = self
-          //resetFoodsByLocation()
-        //print(foodsByLocation)
-        // Do any additional setup after loading the view, typically from a nib.
-        //view.isHidden = true
-        
         
         activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
-         databaseStuff()
+        databaseStuff()
         
-        
-        //date info help pulled from
-        //https://classictutorials.com/2015/07/how-to-get-current-day-month-and-year-in-nsdate-using-swift/
-        
-        
-    
-        //print("Current date is \(currentDateString)")
         populateLabels()
-        
-
-   
+      
         crawl()
-        //view.isHidden = false
-        
-        
+
         semaphore.wait()
         activityIndicator.stopAnimating()
         for i in 20...24 {
@@ -144,7 +114,6 @@ class ViewController: UIViewController, UITabBarDelegate, UITabBarControllerDele
     }
     
     func databaseStuff() {
-        //1
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
@@ -153,7 +122,6 @@ class ViewController: UIViewController, UITabBarDelegate, UITabBarControllerDele
         let managedContext =
             appDelegate.persistentContainer.viewContext
         
-        //2
         let foodFetchRequest =
             NSFetchRequest<NSManagedObject>(entityName: "SavedFood")
         
@@ -163,11 +131,7 @@ class ViewController: UIViewController, UITabBarDelegate, UITabBarControllerDele
         
         let goalFetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Goals")
         
-        //3
         do {
-            
-            //print(databaseFoods as! [SavedFood])
-            
             databaseFoods = try managedContext.fetch(foodFetchRequest)
             parseDatabaseFoods(data: databaseFoods  as! [SavedFood])
             
@@ -185,71 +149,16 @@ class ViewController: UIViewController, UITabBarDelegate, UITabBarControllerDele
             print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
-    
-    /*func pieChartStuff() {
-        let labels = ["Carbohydrates", "Fats", "Protein"]
-        let data = [
-            (savedDays[currentDate]?.nutritionTotals["Total Carbs"]!)! * 4,
-            (savedDays[currentDate]?.nutritionTotals["Total Fat"]!)! * 9,
-            (savedDays[currentDate]?.nutritionTotals["Total Protein"]!)! * 4
-        ]
-        
-        var entries : [PieChartDataEntry] = []
-        let colors: [UIColor] = [UIColor.yellow, UIColor.green, UIColor.red]
-        for i in 0..<labels.count {
-            let percent = Double(data[i])/Double((savedDays[currentDate]?.nutritionTotals["Total Calories"]!)!) * 100.0
-            let entry = PieChartDataEntry(value: percent, label: "\(Int(percent))"+labels[i])
-            entries.append(entry)
-        }
-        
-        let set = PieChartDataSet(values: entries, label: "Calories from Macronutrient Groups")
-        set.colors = colors
-        let theData = PieChartData(dataSet: set)
-        pieChartView.data = theData
-    }*/
-    
-   /* override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //1
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        //2
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "SavedFood")
-        
-        //3
-        do {
-            databaseFoods = try managedContext.fetch(fetchRequest)
-            parseDatabaseFoods(data: databaseFoods  as! [SavedFood])
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-    }*/
-    
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        if (savedDays[currentDate]?.foodsEaten.count)! > 0 && (savedDays[currentDate]?.customFoodsEaten.count)! > 0 {
-            
-        }
         return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         if section == 0 {
             return (savedDays[currentDate]?.foodsEaten.count)!
         } else {
@@ -302,7 +211,6 @@ class ViewController: UIViewController, UITabBarDelegate, UITabBarControllerDele
     
     // this method handles row deletion
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
         if editingStyle == .delete {
             var foodToRemove : Food
             if indexPath.section == 0 {
@@ -328,6 +236,4 @@ class ViewController: UIViewController, UITabBarDelegate, UITabBarControllerDele
         savedDays[currentDate]?.nutritionTotals["Total Sodium"]! -= Int(Double(foodToRemove.nutritionalInformation["Sodium"]!) * quant)
         saveToDate(day: savedDays[currentDate]!)
     }
-
 }
-

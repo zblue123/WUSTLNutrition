@@ -2,8 +2,8 @@
 //  CustomFoodCell.swift
 //  WUSTLNutrition
 //
-//  Created by labuser on 11/15/17.
-//  Copyright © 2017 labuser. All rights reserved.
+//  Created by zblue on 11/15/17.
+//  Copyright © 2017 zblue. All rights reserved.
 //
 
 import UIKit
@@ -34,13 +34,10 @@ class CustomFoodCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }
