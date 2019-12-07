@@ -1,0 +1,6 @@
+framework module Pods_WUSTLNutrition {
+  umbrella header "Pods-WUSTLNutrition-umbrella.h"
+
+  export *
+  module * { export * }
+}

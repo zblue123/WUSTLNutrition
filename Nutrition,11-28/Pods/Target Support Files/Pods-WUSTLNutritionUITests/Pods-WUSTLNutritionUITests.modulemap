@@ -1,0 +1,6 @@
+framework module Pods_WUSTLNutritionUITests {
+  umbrella header "Pods-WUSTLNutritionUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
